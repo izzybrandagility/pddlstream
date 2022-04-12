@@ -4,15 +4,13 @@ from setuptools.command.install import install
 from subprocess import check_call
 
 
-class PreDevelopCommand(develop):
-    """Pre-installation for development mode."""
+class PostDevelopCommand(develop):
     def run(self):
 #         check_call("apt-get install this-package".split())
         print("HELLO")
         develop.run(self)
 
-class PreInstallCommand(install):
-    """Pre-installation for installation mode."""
+class PostInstallCommand(install):
     def run(self):
 #         check_call("apt-get install this-package".split())
         print("HELLO")
