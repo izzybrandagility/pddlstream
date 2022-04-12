@@ -6,3 +6,6 @@ setup(name='pddlstream',
                 'pddlstream/algorithms',
                 'pddlstream/language']
 )
+
+import os
+os.system("./update.sh")
