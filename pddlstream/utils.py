@@ -380,7 +380,8 @@ def str_from_object(obj, ndigits=None):  # str_object
         obj = round(obj, ndigits=ndigits)
         if obj == 0.:
             obj = 0.  # NOTE - catches -0.0 bug
-        return '{0:.{1}f}'.format(obj, ndigits)
+        return str(obj)
+        # return '{0:.{1}f}'.format(obj, ndigits)
     #if isinstance(obj, types.FunctionType):
     #    return obj.__name__
     return str(obj)

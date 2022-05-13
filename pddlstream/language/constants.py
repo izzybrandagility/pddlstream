@@ -160,13 +160,16 @@ def get_length(plan):
 
 def str_from_action(action):
     name, args = action[:2]
-    return '{}{}'.format(name, str_from_object(tuple(args)))
+    return '{}{}'.format(name, str_from_object(tuple(args), ndigits=4))
 
 
 def str_from_plan(plan):
     if not is_plan(plan):
         return str(plan)
-    return str_from_object(list(map(str_from_action, plan)))
+    out = "\n"
+    for i, a in enumerate(map(str_from_action, plan)):
+        out += f"{i}. {a}\n"
+    return out
 
 
 def print_plan(plan):
