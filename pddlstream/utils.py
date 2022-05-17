@@ -365,17 +365,17 @@ class HeapElement(Comparable):
 def sorted_str_from_list(obj, **kwargs):
     return '[{}]'.format(', '.join(sorted(str_from_object(item, **kwargs) for item in obj)))
 
-def str_from_object(obj, ndigits=None):  # str_object
+def str_from_object(obj, ndigits=None, endl=""):  # str_object
     if type(obj) in [list]: #, np.ndarray):
-        return '[{}]'.format(', '.join(str_from_object(item, ndigits) for item in obj))
+        return '[{}]'.format((', ' + endl).join(str_from_object(item, ndigits) for item in obj))
     if type(obj) == tuple:
-        return '({})'.format(', '.join(str_from_object(item, ndigits) for item in obj))
+        return '({})'.format((', ' + endl).join(str_from_object(item, ndigits) for item in obj))
     #if isinstance(obj, dict):
     if type(obj) in [dict, defaultdict, Counter]:
-        return '{{{}}}'.format(', '.join('{}: {}'.format(str_from_object(key, ndigits), str_from_object(obj[key], ndigits)) \
+        return '{{{}}}'.format((', ' + endl).join('{}: {}'.format(str_from_object(key, ndigits), str_from_object(obj[key], ndigits)) \
                                   for key in sorted(obj.keys(), key=lambda k: str_from_object(k, ndigits))))
     if type(obj) in [set, frozenset]:
-        return '{{{}}}'.format(', '.join(sorted(str_from_object(item, ndigits) for item in obj)))
+        return '{{{}}}'.format((', ' + endl).join(sorted(str_from_object(item, ndigits) for item in obj)))
     if (ndigits is not None) and (type(obj) in [float, np.float64]):
         obj = round(obj, ndigits=ndigits)
         if obj == 0.:
